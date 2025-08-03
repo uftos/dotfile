@@ -1,0 +1,160 @@
+{
+  "layer": "top",
+  "margin-left": 3,
+  "margin-right": 3,
+  "margin-top": 2,
+  "margin-bottom": 0,
+  "modules-left": ["cpu", "memory", "disk", "network#speed", "temperature"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "pulseaudio/slider",
+    "backlight",
+    "network",
+    "battery"
+  ],
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+  "custom/cava": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/cava.sh",
+    "on-click": "kitty cava"
+  },
+  "custom/update": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/check-updates.sh"
+    // "on-click": "kitty cava"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "scroll-step": 1,
+    "format": "{icon}",
+    "format-icons": ["󰃞 ", "󰃟 ", "󰃝 ", "󰃠 "],
+    "tooltip": true,
+    "tooltip-format": "{percent}%"
+  },
+  "network#speed": {
+    "interval": 1,
+    "format": "{ifname}%%",
+    "format-wifi": " {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-ethernet": " {bandwidthDownBytes}  {bandwidthUpBytes} ",
+    "format-disconnected": "󰌙",
+    "tooltip-format": "{ipaddr}",
+    "format-linked": "󰈁 {ifname} (No IP)",
+    "tooltip-format-wifi": "{essid} {icon} {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname} 󰌘",
+    "tooltip-format-disconnected": "󰌙 Disconnected",
+    "max-length": 22,
+    "min-length": 20,
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+  },
+  "temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    // "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C ",
+    "format": "{temperatureC}°C "
+},
+  "custom/launcher": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "~/.config/rofi/launcher/launcher.sh"
+  },
+  "cpu": {
+    "interval": 1,
+    "format": "{usage}% <span font='Font Awesome 6 Free-Solid'>\uf2db</span>",
+    "on-click": "kitty btop"
+  },
+  "memory": {
+    "interval": 1,
+    "format": "{percentage}% <span font='Font Awesome 5 Free'>\uf538</span>",
+    "on-click": "kitty btop",
+    "tooltip-format": "{used}/{total} GiB"
+  },
+  "disk": {
+    "interval": 30,
+    "format": "{percentage_free}% 💾",
+    "unit": "GB"
+},
+  "custom/weather": {
+    "format": "{}°C",
+    "tooltip": false,
+    "interval": 3600,
+    "exec": "wttrbar --location 'Ahmedabad'",
+    "return-type": "json"
+  },
+  "clock": {
+    "format": "{:%H:%M | %a %d/%m}",
+    "tooltip": true,
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "network": {
+    "format-wifi": " {icon}",
+    "format-ethernet": "󰈀",
+    "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤢 ", "󰤨 "],
+    "format-disconnected": "󰪎",
+    "interval": 5,
+    "tooltip-format-wifi": " {bandwidthDownBytes} |  {bandwidthUpBytes} | {essid}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "exec ~/.config/rofi/wifi/wifi.sh",
+    "on-click-right": "kitty -e nmtui"
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": " {capacity}% {icon} ",
+    "format-full": "{icon}",
+    "format-plugged": " {capacity}% <span font='Font Awesome 5 Free'>\uf0e7</span> ",
+    //"format-alt": "{icon}",
+    "tooltip-format": "{capacity}%, about {time} left",
+    "format-icons": [" ", " ", " ", " "],
+    "on-click": "~/.config/rofi/powermenu/powermenu.sh"
+  },
+  // "pulseaudio": {
+  //   "format": "<span font='Font Awesome 5 Free'>{icon}</span>",
+  //   "format-muted": "<span font='Font Awesome 5 Free'>\uf6a9</span>",
+  //   "format-icons": {
+  //     "headphone": "\uf025",
+  //     "default": ["\uf028"]
+  //     // "default": [
+  //     //   "▁", // 0–16%
+  //     //   "▂▁", // 17–33%
+  //     //   "▃▂▁", // 34–50%
+  //     //   "▄▃▂▁", // 51–66%
+  //     //   "▅▄▃▂▁", // 67–83%
+  //     //   "▆▅▄▃▂▁" // 84–100%
+  //     // ]
+  //     // "default": [
+  //     //   "░░░░░░░░░░",
+  //     //   "▓░░░░░░░░░",
+  //     //   "▓▓░░░░░░░░",
+  //     //   "▓▓▓░░░░░░░",
+  //     //   "▓▓▓▓░░░░░░",
+  //     //   "▓▓▓▓▓░░░░░",
+  //     //   "▓▓▓▓▓▓░░░░",
+  //     //   "▓▓▓▓▓▓▓░░░",
+  //     //   "▓▓▓▓▓▓▓▓░░",
+  //     //   "▓▓▓▓▓▓▓▓▓░",
+  //     //   "▓▓▓▓▓▓▓▓▓▓"
+  //     // ]
+  //   },
+  //   "tooltip-format": "{volume}% {desc}",
+  //   "on-click": "pamixer -t"
+  // },
+  //"wireplumber": {
+  //  "max-volume": 200,
+  //  "scroll-step": 5,
+  //  "format": "{icon}",
+  //  "format-bluetooth": "{icon}",
+  //  "format-icons": [" ", " ", " "],
+  //  "format-muted": " ",
+  //  "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+  //  "on-click": "pamixer -t",
+  //  "tooltip-format": "{volume}% | {desc}"
+  //},
+}
